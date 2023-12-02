@@ -7,6 +7,7 @@ namespace Loupedeck.DemoPlugin
 
     public class StaticEventDrivenButton : PluginDynamicCommand
     {
+        public static Int32 NUMBER_OF_BUTTONS = 5;
         public static bool CheckStatusCode(string url)
         {
             try
@@ -57,53 +58,65 @@ namespace Loupedeck.DemoPlugin
             }
         }
 
-        public static void ExecuteInBackground(StaticEventDrivenButton button)
+        public static void ExecuteInBackground(StaticEventDrivenButton button, Int32 i)
         {
             while (true)
             {
-                // Wait for 5 seconds
+                // Wait for 2 seconds
                 Thread.Sleep(2000);
                 if (button != null)
                 {
-                    var new_image = StaticEventDrivenButton.DownloadFileAsBytes("http://localhost:5000/button/1/image");
-                    button.SetImage(new_image);
+                    var new_image = StaticEventDrivenButton.DownloadFileAsBytes($"http://localhost:5000/button/{i}/image");
+                    button.SetImage(new_image, i);
                 }
 
             }
 
         }
-        private byte[] image_as_byte = null;
+        private byte[][] image_as_byte = new byte[NUMBER_OF_BUTTONS][];
 
         public StaticEventDrivenButton()
-            : base(displayName: "StaticEventDrivenButton", description: "Button that can be configured to target a backend server.", groupName: "Event Driven")
+            : base()
         {
-            Thread thread = new Thread(() => StaticEventDrivenButton.ExecuteInBackground(this));
-            thread.Start();
+            
+            for (var i = 0; i < NUMBER_OF_BUTTONS; i++)
+            {
+                Thread thread = new Thread(() => StaticEventDrivenButton.ExecuteInBackground(this, i));
+                // Parameter is the switch index
+                var actionParameter = i.ToString();
+
+                // Add parameter
+                this.AddParameter(actionParameter, $"StaticEventDrivenButton {i}", "EventDrivenButtons");
+                thread.Start();
+            }
         }
 
-        public void SetImage(byte[] image)
+        public void SetImage(byte[] image, Int32 i)
         {
+            this.image_as_byte[i] = image.CreateDeepCopy();
             this.ActionImageChanged();
         }
         protected override BitmapImage GetCommandImage(String actionParameter, PluginImageSize imageSize)
         {
             using (var bitmapBuilder = new BitmapBuilder(imageSize))
             {
-                if (this.image_as_byte != null)
+                if (Int32.TryParse(actionParameter, out var i))
                 {
-                    return BitmapImage.FromArray(this.image_as_byte);
+                    if (this.image_as_byte != null)
+                    {
+                        return BitmapImage.FromArray(this.image_as_byte[i]);
+                    }
                 }
-
                 return bitmapBuilder.ToImage();
             }
         }
 
 
-        protected override void RunCommand(String text)
+        protected override void RunCommand(String actionParameter)
         {
-            if (!CheckStatusCode("http://localhost:5000/button/1/launch"))
+            if (Int32.TryParse(actionParameter, out var i))
             {
-
+                CheckStatusCode($"http://localhost:5000/button/{i}/launch");
             }
         }
     }

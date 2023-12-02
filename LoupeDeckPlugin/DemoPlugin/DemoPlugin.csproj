@@ -51,10 +51,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CounterAdjustment.cs" />
-    <Compile Include="ButtonSwitchesCommand.cs" />
     <Compile Include="EventDrivenButton.cs" />
-    <Compile Include="ToggleMuteCommand.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="DemoApplication.cs" />
     <Compile Include="DemoPlugin.cs" />
@@ -63,7 +60,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="TextFile1.txt" />
     <None Include="metadata\LoupedeckPackage.yaml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
