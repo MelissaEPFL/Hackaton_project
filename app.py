@@ -10,5 +10,5 @@ app = Flask(__name__)
 @app.route('/')
 
 def hello():
-    return get_time_spent("aw-watcher-window", "aw-watcher-window_LAPTOP-H8NECJ78", "devenv.exe")
+    return get_time_spent("vscode")
 
