@@ -33,14 +33,21 @@ def get_last_time_on(name_app:str)->str:
     bucket_id = f"aw-watcher-window_{socket.gethostname()}"
     events = client.get_events(bucket_id = bucket_id)
 
+    timestamps = []
+
     #last time on name_app (events are in order)
     for event in events:
         if event['data']['app'] == get_process_name(name_app):
-            print(datetime.datetime.now(datetime.timezone.utc))
-            last_time = (datetime.datetime.now(datetime.timezone.utc) - event['timestamp']).total_seconds()
 
-    return str(datetime.timedelta(seconds=last_time))
-
+            timestamps.append(event['timestamp'])
+    
+    if (len(timestamps) > 0):
+        
+        last_time = max(timestamps)
+        return str((datetime.datetime.now(datetime.timezone.utc) - last_time))
+    else:
+        return "No use of " + name_app + " since you turned your computer on"
+    
 
 
 def get_computer_name()->str:
