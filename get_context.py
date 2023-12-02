@@ -5,21 +5,23 @@ import datetime
 
 
 
-def get_time_spent(target)->str:
+def get_time_spent(name_app)->str:
 
     # Connect to the local ActivityWatch server
-    client = ActivityWatchClient(client_name="aw-watcher-window", host="localhost", port=5600)
+    client = ActivityWatchClient(client_name="test-client", host="localhost", port=5600)
 
     # Get the events for Visual Studio Code
-    events = client.get_events(bucket_id = "aw-watcher-window_"+get_computer_name())
+    watcher = get_watcher(name_app)
+    bucket_id = f"{watcher}_{socket.gethostname()}"
+    events = client.get_events(bucket_id = bucket_id)
 
-    # Calculate the total time spent on Visual Studio Code
+    # Calculate the total time spent on app
     time_spent = 0
 
     for event in events:
-        if event["data"]["app"] == get_target_name(target):
-            time_spent += event["duration"] / datetime.timedelta(minutes=1)
+        time_spent += event["duration"] / datetime.timedelta(seconds=1)
 
+           
     return str(time_spent)
 
 
@@ -27,8 +29,10 @@ def get_computer_name()->str:
     return socket.gethostname()
 
 
-def get_target_name(name_app:str)->str:
+def get_watcher(name_app:str)->str:
 
-    if name_app == 'vscode':
-        return "devenv.exe"
+    if name_app == 'vscode_studio':
+        return  "aw-watcher-vscode"
+    elif name_app == 'last_pause':
+        return "aw_watcher_afk"
  

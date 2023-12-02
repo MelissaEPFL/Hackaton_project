@@ -10,5 +10,5 @@ app = Flask(__name__)
 @app.route('/')
 
 def hello():
-    return get_time_spent("vscode")
+    return get_time_spent("vscode_studio")
 
