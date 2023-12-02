@@ -1,0 +1,11 @@
+# VS code files
+.vs/
+
+
+# tests
+test.py
+
+#environment
+env/
+
+
