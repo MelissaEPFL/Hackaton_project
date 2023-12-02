@@ -60,6 +60,8 @@ def get_process_name(name_app)->str:
         return  "devenv.exe"
     elif name_app == 'vscode_studio':
         return "Code.exe"
+    elif name_app == "thunderbird_mail":
+        return "thunderbird.exe"
  
 
  
