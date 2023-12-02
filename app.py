@@ -10,6 +10,6 @@ app = Flask(__name__)
 @app.route('/')
 
 def hello():
-    
+    print('hello')
     return get_last_time_on("vscode")
 
