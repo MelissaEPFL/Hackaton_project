@@ -1,0 +1,10 @@
+C:\Users\Romai\AppData\Local\Loupedeck\Plugins\Demo\metadata\Icon256x256.png
+C:\Users\Romai\AppData\Local\Loupedeck\Plugins\Demo\metadata\LoupedeckPackage.yaml
+C:\Users\Romai\AppData\Local\Loupedeck\Plugins\Demo\DemoPlugin.dll.config
+C:\Users\Romai\AppData\Local\Loupedeck\Plugins\Demo\DemoPlugin.dll
+C:\Users\Romai\AppData\Local\Loupedeck\Plugins\Demo\DemoPlugin.pdb
+C:\Users\Romai\Documents\Lauzhack2023\backend\Hackaton_project\obj\Debug\DemoPlugin.csproj.AssemblyReference.cache
+C:\Users\Romai\Documents\Lauzhack2023\backend\Hackaton_project\obj\Debug\DemoPlugin.csproj.CoreCompileInputs.cache
+C:\Users\Romai\Documents\Lauzhack2023\backend\Hackaton_project\obj\Debug\DemoPlugin.csproj.CopyComplete
+C:\Users\Romai\Documents\Lauzhack2023\backend\Hackaton_project\obj\Debug\DemoPlugin.dll
+C:\Users\Romai\Documents\Lauzhack2023\backend\Hackaton_project\obj\Debug\DemoPlugin.pdb

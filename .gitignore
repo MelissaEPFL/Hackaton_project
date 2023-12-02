@@ -1,6 +1,8 @@
 # VS code files
 .vs/
 
+LoupeDeckPlugin/.vscode/
+LoupeDeckPlugin/.vs/
 
 # tests
 test.py
