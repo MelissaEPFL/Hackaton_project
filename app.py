@@ -1,4 +1,4 @@
-from get_context import get_time_spent
+from get_context import *
 
 from flask import Flask
 
@@ -10,5 +10,5 @@ app = Flask(__name__)
 @app.route('/')
 
 def hello():
-    return get_time_spent("vscode_studio")
+    return get_last_time_on("vscode")
 
