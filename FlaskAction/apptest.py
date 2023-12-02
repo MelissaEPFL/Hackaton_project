@@ -9,7 +9,7 @@ app = Flask(__name__)
 
 @app.get('/')
 async def root():
-    return {'example' : 'This is an example', 'data' : 0}
+    return "Fill here"
 
 @app.get('/buttons')
 async def get_buttons():
@@ -30,7 +30,7 @@ async def launch_script(button_number : str):
         else:
             return Response("<h2> Script not found, Status : 404</h2>", status=404)
     else :
-        return Response("<h2> Directory not found, Status : 400</h2>",status=400)
+        return Response(f"<h2> Directory not found, Status : 400</h2>",status=400)
     
 @app.get('/button/<button_number>/config')
 async def get_config(button_number : str):
