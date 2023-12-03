@@ -7,6 +7,6 @@ from context_trigger import trigger_thunderbird
 
 def main_update():
     if trigger_thunderbird():
-        return "thunder_sad.png"
+        return "thunder_saturated.png"
     else:
-        return "image.png"
+        return "thunder_desaturated.png"
