@@ -11,5 +11,6 @@ test.py
 
 #environment
 env/
-
+Lib/
+SCripts/
 
