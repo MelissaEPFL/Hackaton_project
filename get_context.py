@@ -24,7 +24,7 @@ def get_time_spent(name_app)->str:
     return str(datetime.timedelta(seconds=time_spent))
 
 
-def get_last_time_on(name_app:str)->str:
+def get_last_time_on(name_app:str)->datetime.timedelta:
 
     # Connect to the local ActivityWatch server
     client = ActivityWatchClient(client_name="test-client", host="localhost", port=5600)
@@ -47,7 +47,29 @@ def get_last_time_on(name_app:str)->str:
         return (datetime.datetime.now(datetime.timezone.utc) - last_time)
     else:
         return None
+
+
+def get_last_pause()->datetime.timedelta:
+
+    # Connect to the local ActivityWatch server
+    client = ActivityWatchClient(client_name="test-client", host="localhost", port=5600)
+
+    # Get the events for Visual Studio Code
+    bucket_id = f"aw-watcher-afk_{socket.gethostname()}"
+    events = client.get_events(bucket_id = bucket_id)
+
+    timestamps_pause = []
+
+    #last time on name_app (events are in order)
+    for event in events:
+        if event['data']['status'] == "afk":
+            timestamps_pause.append(event['timestamp'])
     
+    if (len(timestamps_pause) > 0):
+        last_time = max(timestamps_pause)
+        return (datetime.datetime.now(datetime.timezone.utc) - last_time)
+    else:
+        return None
 
 
 def get_computer_name()->str:
