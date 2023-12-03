@@ -64,9 +64,14 @@ def trigger_thunderbird(trigger_time = datetime.timedelta(seconds=15))->bool:
         return False
 
 
-def trigger_pause_reminder(trigger_time = datetime.timedelta(seconds=20))->bool:
+def trigger_pause_reminder(trigger_time = datetime.timedelta(seconds=60))->bool:
 
     last_pause = get_last_pause()
+    print("-----")
+    print(last_pause)
+    print(last_pause > trigger_time)
+    if last_pause is None:
+        return False
 
     if last_pause > trigger_time:
         return True

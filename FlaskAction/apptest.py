@@ -50,8 +50,6 @@ async def get_config(button_number : str):
 @app.get('/button/<button_number>/image')
 async def get_image(button_number : str):
     path_dir = './button/'+button_number
-    print(path_dir)
-    print(os.path.isdir(path_dir))
     target_directory = f"./button/{button_number}"
     if os.path.isdir(path_dir):
         path_file = execute_function_from_module(f"{target_directory}/update.py", "main_update")
@@ -59,7 +57,6 @@ async def get_image(button_number : str):
             path_file = target_directory + "/" + path_file
         else:
             print(f"output was none for {target_directory}/update.py")
-        print(path_file)
         if path_file is not None and os.path.isfile(path_file):
             
             return send_file(path_file)
