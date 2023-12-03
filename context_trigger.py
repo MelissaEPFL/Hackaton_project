@@ -77,3 +77,4 @@ def trigger_pause_reminder(trigger_time = datetime.timedelta(seconds=60))->bool:
         return True
     else:
         return False
+    
