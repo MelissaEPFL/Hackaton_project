@@ -29,6 +29,7 @@ def get_number_unread_emails()->int:
     if unseen_emails != 0:
         print(f"You have {unseen_emails} unseen emails!")
         # Process or fetch these emails if needed
+        # this is some comment
 
     # Logout from the server
     mail.logout()
