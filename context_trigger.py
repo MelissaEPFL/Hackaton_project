@@ -70,6 +70,7 @@ def trigger_pause_reminder(trigger_time = datetime.timedelta(seconds=60))->bool:
     print("-----")
     print(last_pause)
     print(last_pause > trigger_time)
+    # a comment
     if last_pause is None:
         return False
 
