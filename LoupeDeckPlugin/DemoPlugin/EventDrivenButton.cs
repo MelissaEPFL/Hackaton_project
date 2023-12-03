@@ -1,6 +1,7 @@
 namespace Loupedeck.DemoPlugin
 {
     using System;
+    using System.Linq;
     using System.Net;
     using System.Threading;
     using System.Threading.Tasks;
@@ -78,9 +79,10 @@ namespace Loupedeck.DemoPlugin
         public StaticEventDrivenButton()
             : base()
         {
-            
+            this.image_as_byte = new byte[NUMBER_OF_BUTTONS][];
             for (var i = 0; i < NUMBER_OF_BUTTONS; i++)
             {
+                this.image_as_byte[i] = new byte[80*80];
                 Thread thread = new Thread(() => StaticEventDrivenButton.ExecuteInBackground(this, i));
                 // Parameter is the switch index
                 var actionParameter = i.ToString();
@@ -93,8 +95,29 @@ namespace Loupedeck.DemoPlugin
 
         public void SetImage(byte[] image, Int32 i)
         {
-            this.image_as_byte[i] = image.CreateDeepCopy();
-            this.ActionImageChanged();
+            if (image == null)
+            {
+                return;
+            }
+            if (this.image_as_byte == null)
+            {
+                return;
+            }
+            if (this.image_as_byte.Length <= i)
+            {
+                return;
+            }
+            if (this.image_as_byte[i] == null)
+            {
+                this.image_as_byte[i] = image.CreateDeepCopy();
+                this.ActionImageChanged();
+
+            }
+            else if (!this.image_as_byte[i].SequenceEqual(image))
+            {
+                this.image_as_byte[i] = image.CreateDeepCopy();
+                this.ActionImageChanged();
+            }
         }
         protected override BitmapImage GetCommandImage(String actionParameter, PluginImageSize imageSize)
         {
