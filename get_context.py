@@ -44,9 +44,9 @@ def get_last_time_on(name_app:str)->str:
     if (len(timestamps) > 0):
         
         last_time = max(timestamps)
-        return str((datetime.datetime.now(datetime.timezone.utc) - last_time))
+        return (datetime.datetime.now(datetime.timezone.utc) - last_time)
     else:
-        return "No use of " + name_app + " since you turned your computer on"
+        return None
     
 
 
