@@ -48,11 +48,6 @@ def trigger_thunderbird(trigger_time = datetime.timedelta(seconds=15))->bool:
         with open("./last_time_on_thunderbird.pickle", 'wb') as file:
             pickle.dump(unread_emails, file)
         last_number_of_emails_unseen = load_integer_from_pickle("./last_time_on_thunderbird.pickle")
-        
-    if unread_emails > last_number_of_emails_unseen:
-        return True
-    else:
-        return False
     
 
     #Check when was the last time you were on Thunderbird
@@ -62,7 +57,7 @@ def trigger_thunderbird(trigger_time = datetime.timedelta(seconds=15))->bool:
 
 
     if last_time_on > trigger_time:
-        if True:
+        if unread_emails > last_number_of_emails_unseen:
             return True
     else: 
         return False
