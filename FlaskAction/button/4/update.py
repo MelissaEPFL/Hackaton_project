@@ -7,6 +7,6 @@ from context_trigger import trigger_pause_reminder
 
 def main_update():
     if trigger_pause_reminder():
-        return "rickroll-roll.gif"
+        return "beach.PNG"
     else:
-        return "beach.jpg"
+        return "rickroll-roll.gif"
