@@ -22,6 +22,7 @@ def get_number_unread_emails()->int:
 
     # Search for unseen emails
     status, response = mail.search(None, 'UNSEEN')
+    
     # Get the list of unseen emails
     unseen_emails = len(response[0].decode(encoding="utf-8").split(" "))
 
